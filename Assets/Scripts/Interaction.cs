@@ -5,36 +5,26 @@ using Random = System.Random;
 using System.Linq;
 
 
-public class Interaction : MonoBehaviour
+public static class Interaction
 {
-    public Dictionary<string,int> currPotion; //potion that the player creates
-    public Dictionary<string, int> answerPotion; //fixed answer generated at start of game
-    public Dictionary<string, int> potionDiff; // dictionary to log difference in ingradients
-    private Random rnd = new Random();
+    private static int difficulty = 4;
+    private static Random rnd = new Random();
 
-    // Start is called before the first frame update
-    void Start()
+    public static Dictionary<Constants.Ingredient, int> generateAnswer(Dictionary<Constants.Ingredient, int> answerPotion)
     {
-        generateAnswer();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void generateAnswer()
-    {
-        foreach(KeyValuePair<string, int> ingredient in answerPotion)
+        Dictionary<Constants.Ingredient, int> copyPotion = answerPotion.ToDictionary<KeyValuePair<Constants.Ingredient, int>, Constants.Ingredient, int>(entry => entry.Key, entry => entry.Value);;
+        foreach(KeyValuePair<Constants.Ingredient, int> ingredient in answerPotion)
         {
-            answerPotion[ingredient.Key] = rnd.Next(4); //tweak difficulty
+            copyPotion[ingredient.Key] = rnd.Next(difficulty); //tweak difficulty
         }
+        // copy answerPotion
+        return copyPotion;
     }
-    public bool receive()
+    public static Dictionary<Constants.Ingredient, int> receive(Dictionary<Constants.Ingredient, int> currPotion, Dictionary<Constants.Ingredient, int> answerPotion)
     {
+        Dictionary<Constants.Ingredient, int> potionDiff = new Dictionary<Constants.Ingredient, int>();
         int mistakeCount = 0;
-        foreach (KeyValuePair<string, int> ingredient in currPotion)
+        foreach (KeyValuePair<Constants.Ingredient, int> ingredient in currPotion)
         {
             if(currPotion[ingredient.Key] != answerPotion[ingredient.Key])
             {
@@ -42,39 +32,54 @@ public class Interaction : MonoBehaviour
                 mistakeCount++;
             }
         }
-
-        if(mistakeCount == 0)
-        {
-            victory();
-            Debug.Log("u win");
-            return true;
-        }
-        else
-        {
-            mistakeFeedback();
-            return false;
-        }
+        return potionDiff;
     }
 
 
-    public void mistakeFeedback()
+    public static string mistakeFeedback(Constants.FeedbackType feedbackType, Dictionary<Constants.Ingredient, int> answerPotion, Dictionary<Constants.Ingredient, int> potionDiff)
     {
         string output;
-        int index = rnd.Next(potionDiff.Count);
-        if (potionDiff.ElementAt(index).Value > 0)
+        switch (feedbackType)
         {
-            output = "THERE IS TOO MUCH" + potionDiff.ElementAt(index);
+            case Constants.FeedbackType.Vague:
+                int index = rnd.Next(potionDiff.Count);
+                if (potionDiff.ElementAt(index).Value > 0)
+                {
+                    output = "THERE IS TOO MUCH " + potionDiff.ElementAt(index).Key;
+                }
+                else
+                {
+                    output = "THERE IS TOO LITTLE " + potionDiff.ElementAt(index).Key;
+                }
+                break;
+            case Constants.FeedbackType.Specific:
+                string tooMuch = "";
+                string tooLittle = "";
+                foreach (KeyValuePair<Constants.Ingredient, int> ingredient in potionDiff)
+                {
+                    if (ingredient.Value > 0)
+                    {
+                        tooMuch += ingredient.Key + ", ";
+                    }
+                    else
+                    {
+                        tooLittle += ingredient.Key + ", ";
+                    }
+                }
+                output = "THERE IS TOO MUCH" + tooMuch + " AND TOO LITTLE " + tooLittle;
+                break;
+            case Constants.FeedbackType.FullAnswer:
+                output = "YOU NEED: ";
+                foreach (KeyValuePair<Constants.Ingredient, int> ingredient in answerPotion)
+                {
+                    output += ingredient.Value + " " + ingredient.Key + ", ";
+                }
+                break;
+            default:
+                output = "";
+                break;
         }
-        else
-        {
-            output = "THERE IS TOO LITTLE" + potionDiff.ElementAt(index);
-        }
-
-        //add more feedback
-    }
-    public void victory()
-    {
-        //win actions
+        return output;
     }
 
 }

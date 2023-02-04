@@ -17,9 +17,15 @@ public class GameManager : MonoBehaviour
         {Constants.Ingredient.Item3, 0},
     };
 
+    private static Dictionary<Constants.Ingredient, int> answerPotion;
+
+    private static Dictionary<Constants.Ingredient, int> potionDiff; // dictionary to log difference in ingradients
+
     public static Constants.GameState gameState = Constants.GameState.PreGame;
     public static float timeNow = 0f;
     private static bool isTimerRunning = false;
+    private static int tries = 0;
+    private static int triesMax = 3;
 
     void Awake()
     {
@@ -33,6 +39,8 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        
+        answerPotion = Interaction.generateAnswer(inventory);
     }
 
     public static void AddToInventory(Constants.Ingredient ingredient)
@@ -54,10 +62,15 @@ public class GameManager : MonoBehaviour
     {
         ResetInventory();
         // TODO: Mix the ingredients
-        bool isCorrect = true;
+        potionDiff = Interaction.receive(inventory, answerPotion);
+        bool isCorrect = potionDiff.Count == 0;
         if (isCorrect)
         {
             recipesBrewed++;
+        }
+        else
+        {
+            tries++;
         }
         if (recipesBrewed == 1)
         {
@@ -75,6 +88,16 @@ public class GameManager : MonoBehaviour
     private static void StartTimer()
     {
         isTimerRunning = true;
+    }
+
+    public static string GetFeedback()
+    {
+        Constants.FeedbackType feedbackType= tries <= 1 
+            ? Constants.FeedbackType.Vague 
+            : tries <= 2
+            ? Constants.FeedbackType.Specific
+            : Constants.FeedbackType.FullAnswer;
+        return Interaction.mistakeFeedback(feedbackType, answerPotion, potionDiff);
     }
 
     void Update()
