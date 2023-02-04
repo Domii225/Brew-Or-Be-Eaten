@@ -10,7 +10,12 @@ public class OnCollision : MonoBehaviour
     {
         if (other.CompareTag("Spoon"))
         {
-            BrewMixture();
+            bool isMixtureSuccessful = GameManager.BrewMixture();
+            if (isMixtureSuccessful)
+            {
+                BrewMixture();
+            }
+            
         }
     }
     void BrewMixture ()

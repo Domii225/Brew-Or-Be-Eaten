@@ -33,12 +33,22 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         ResetInventory();
-        answerPotion = Interaction.generateAnswer(inventory);
+        answerPotion = new Dictionary<Constants.Ingredient, int> {
+            {Constants.Ingredient.Root1, 1},
+            {Constants.Ingredient.Root2, 0},
+            {Constants.Ingredient.Root3, 0},
+            {Constants.Ingredient.Item1, 0},
+            {Constants.Ingredient.Item2, 0},
+            {Constants.Ingredient.Item3, 0},
+        };
+        // TODO: uncomment below
+        // answerPotion = Interaction.generateAnswer(inventory);
     }
 
     public static void AddToInventory(Constants.Ingredient ingredient)
     {
         inventory[ingredient]++;
+        Debug.Log(inventory);
     }
 
     private static void ResetInventory()
@@ -55,8 +65,9 @@ public class GameManager : MonoBehaviour
 
     public static bool BrewMixture()
     {
-        ResetInventory();
-        // TODO: Mix the ingredients
+        Debug.Log(GetInventoryString());
+        Debug.Log(Interaction.mistakeFeedback(Constants.FeedbackType.FullAnswer, answerPotion, potionDiff));
+        // Mix the ingredients
         potionDiff = Interaction.receive(inventory, answerPotion);
         bool isCorrect = potionDiff.Count == 0;
         if (isCorrect)
@@ -77,7 +88,18 @@ public class GameManager : MonoBehaviour
         {
             gameState = Constants.GameState.WinGame;
         }
+        ResetInventory();
         return isCorrect;
+    }
+
+    private static string GetInventoryString()
+    {
+        string inventoryString = "";
+        foreach (KeyValuePair<Constants.Ingredient, int> entry in inventory)
+        {
+            inventoryString += entry.Key + ": " + entry.Value + ", ";
+        }
+        return inventoryString;
     }
 
     private static void StartTimer()
