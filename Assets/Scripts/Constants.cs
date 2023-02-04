@@ -20,4 +20,11 @@ namespace Constants
         Item2,
         Item3,
     }
+
+    public enum FeedbackType
+    {
+        Vague,
+        Specific,
+        FullAnswer,
+    }
 }
