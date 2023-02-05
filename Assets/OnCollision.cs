@@ -10,16 +10,33 @@ public class OnCollision : MonoBehaviour
     {
         if (other.CompareTag("Spoon"))
         {
-            bool isMixtureSuccessful = GameManager.BrewMixture();
-            if (isMixtureSuccessful)
-            {
-                BrewMixture();
-            }
-            
+            StartCoroutine(Brewing());
+        }
+    }
+
+    IEnumerator Brewing()
+    {
+        yield return new WaitForSeconds(1);
+        bool isMixtureSuccessful = GameManager.BrewMixture();
+        if (isMixtureSuccessful)
+        {
+            BrewMixture();
+        }
+        else
+        {
+            BrewFailure();
         }
     }
     void BrewMixture ()
     {
-        Instantiate(objToSpawn, SpawnPoint.position, SpawnPoint.rotation);
+        GameObject obj = Instantiate(objToSpawn, SpawnPoint.position, SpawnPoint.rotation);
+        obj.name = "Success";
     }
+    void BrewFailure ()
+    {
+        GameObject obj = Instantiate(objToSpawn, SpawnPoint.position, SpawnPoint.rotation);
+        obj.name = GameManager.GetFeedback();
+    }
+    
+
 }

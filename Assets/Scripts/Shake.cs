@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Shake : MonoBehaviour
 {
-    public static bool shake = false;
+    public bool shake = false;
+    public static bool shakeStatic = false;
     public AnimationCurve curve;
     public float duration = 1f;
+    public static float shakeAmount = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -17,9 +19,10 @@ public class Shake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (shake)
+        if (shake || shakeStatic)
         {
             shake = false;
+            shakeStatic = false;
             StartCoroutine(ShakeCamera());
         }
     }
