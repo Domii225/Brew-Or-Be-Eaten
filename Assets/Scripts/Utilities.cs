@@ -13,14 +13,14 @@ public static class Utilities
                 return Constants.Ingredient.BlueRoot;
             case "GreenRoot":
                 return Constants.Ingredient.GreenRoot;
-            case "Item1":
-                return Constants.Ingredient.Item1;
-            case "Item2":
-                return Constants.Ingredient.Item2;
-            case "Item3":
-                return Constants.Ingredient.Item3;
+            case "Eyeball":
+                return Constants.Ingredient.Eyeball;
+            case "Heart":
+                return Constants.Ingredient.Heart;
+            case "Mandragora":
+                return Constants.Ingredient.Mandragora;
             default:
-                return Constants.Ingredient.Item3;
+                return Constants.Ingredient.Mandragora;
         }
     }
 }
