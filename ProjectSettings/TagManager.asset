@@ -7,6 +7,9 @@ TagManager:
   - Spoon
   - HandPalm
   - Mixture
+  - RedRoot
+  - BlueRoot
+  - GreenRoot
   layers:
   - Default
   - TransparentFX
