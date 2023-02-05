@@ -42,9 +42,9 @@ public class GameManager : MonoBehaviour
             {Constants.Ingredient.RedRoot, 1},
             {Constants.Ingredient.BlueRoot, 1},
             {Constants.Ingredient.GreenRoot, 1},
-            {Constants.Ingredient.Item1, 0},
-            {Constants.Ingredient.Item2, 0},
-            {Constants.Ingredient.Item3, 0},
+            {Constants.Ingredient.Eyeball, 1},
+            {Constants.Ingredient.Heart, 1},
+            {Constants.Ingredient.Mandragora, 1},
         };
     monsterResponseManager = TextObject.GetComponent<MonsterResponseManager>();
     // TODO: uncomment below

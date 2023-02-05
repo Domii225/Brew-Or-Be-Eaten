@@ -16,9 +16,9 @@ namespace Constants
         RedRoot,
         BlueRoot,
         GreenRoot,
-        Item1,
-        Item2,
-        Item3,
+        Eyeball,
+        Heart,
+        Mandragora,
     }
 
     public enum FeedbackType
