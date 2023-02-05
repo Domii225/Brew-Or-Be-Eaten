@@ -10,6 +10,9 @@ TagManager:
   - RedRoot
   - BlueRoot
   - GreenRoot
+  - Eyeball
+  - Mandragora
+  - Heart
   layers:
   - Default
   - TransparentFX
