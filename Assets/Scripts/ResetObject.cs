@@ -23,8 +23,6 @@ public class ResetObject : MonoBehaviour
         }
         if (other.CompareTag("Mixture"))
         {
-            Debug.Log("Current: " + GameManager.GetDictionaryString(GameManager.inventory));
-            Debug.Log("You need: " + GameManager.GetDictionaryString(GameManager.answerPotion));
             GameManager.AddToInventory(Utilities.GetIngredientFromTag(gameObject.tag));
             transform.position = farPosition;
             if (gameObject.tag.Contains("Root"))

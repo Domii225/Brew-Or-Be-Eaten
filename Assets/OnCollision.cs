@@ -18,32 +18,24 @@ public class OnCollision : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         bool isMixtureSuccessful = GameManager.BrewMixture();
-        if (!GameManager.isInventoryEmpty())
+        if (isMixtureSuccessful)
         {
-            GameManager.ResetInventory();
-            if (isMixtureSuccessful)
-            {
-                Debug.Log("Success");
-                BrewMixture();
-            }
-            else
-            {
-                Debug.Log("Success");
-                BrewFailure();
-            }
+            BrewMixture();
+        }
+        else
+        {
+            BrewFailure();
         }
     }
     void BrewMixture ()
     {
         GameObject obj = Instantiate(objToSpawn, SpawnPoint.position, SpawnPoint.rotation);
         obj.name = "Success";
-        Debug.Log(obj.name);
     }
     void BrewFailure ()
     {
         GameObject obj = Instantiate(objToSpawn, SpawnPoint.position, SpawnPoint.rotation);
         obj.name = GameManager.GetFeedback();
-        Debug.Log(obj.name);
     }
     
 

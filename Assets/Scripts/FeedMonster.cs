@@ -17,32 +17,40 @@ public class FeedMonster : MonoBehaviour
         
     }
 
-    void onTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.name.Contains("Success"))
+        Debug.Log(other.name);
+        Debug.Log(other.tag);
+
+        if (other.CompareTag("Human"))
         {
-            GameManager.recipesBrewed++;
-            if (GameManager.recipesBrewed == 1)
+            
+            if (other.name.Contains("Success"))
             {
-                GameManager.StartTimer();
-                GameManager.answerPotion = Interaction.generateAnswer(GameManager.inventory);
-                GameManager.gameState = Constants.GameState.InGame;
-                Debug.Log("YOUR TIMER STARTS NOW"); // Monster growl
-                GameManager.MonsterMessage("YOUR TIMER STARTS NOW");
+                GameManager.recipesBrewed++;
+                if (GameManager.recipesBrewed == 1)
+                {
+                    GameManager.StartTimer();
+                    GameManager.answerPotion = Interaction.generateAnswer(GameManager.inventory);
+                    GameManager.gameState = Constants.GameState.InGame;
+                    Debug.Log("YOUR TIMER STARTS NOW"); // Monster growl
+                    GameManager.MonsterMessage("YOUR TIMER STARTS NOW");
+                }
+                if (GameManager.recipesBrewed >= GameManager.recipesToWin)
+                {
+                    GameManager.gameState = Constants.GameState.WinGame;
+                }
             }
-            if (GameManager.recipesBrewed >= GameManager.recipesToWin)
+            else
             {
-                GameManager.gameState = Constants.GameState.WinGame;
+                GameManager.tries++;
+                Shake.shakeAmount = GameManager.tries * shakeStrength;
+                Shake.shakeStatic = true;
+                Debug.Log(other.name); // Monster growl
+                GameManager.MonsterMessage(other.name);
             }
+            Destroy(other.gameObject);
         }
-        else
-        {
-            GameManager.tries++;
-            Shake.shakeAmount = GameManager.tries * shakeStrength;
-            Shake.shakeStatic = true;
-            Debug.Log(other.name); // Monster growl
-            GameManager.MonsterMessage(other.name);
-        }
-        Destroy(other.gameObject);
+        
     }
 }

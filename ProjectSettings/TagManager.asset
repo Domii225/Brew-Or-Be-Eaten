@@ -13,6 +13,7 @@ TagManager:
   - Eyeball
   - Mandragora
   - Heart
+  - Human
   layers:
   - Default
   - TransparentFX

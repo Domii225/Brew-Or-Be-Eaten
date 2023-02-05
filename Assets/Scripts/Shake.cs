@@ -11,7 +11,7 @@ public class Shake : MonoBehaviour
     public float duration = 1f;
     public static float shakeAmount = 1f;
 
-    public FallingRocks script;
+    
     
 
     // Start is called before the first frame update
@@ -35,7 +35,7 @@ public class Shake : MonoBehaviour
     {
         Vector3 startPosition = transform.position;
         float time = 0f;
-        script.SpawnFallingRocks();
+        
 
         while (time < duration)
         {

@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     Debug.Log(GetDictionaryString(inventory));
   }
 
-  public static void ResetInventory()
+  private static void ResetInventory()
   {
     foreach (Constants.Ingredient ingredient in Enum.GetValues(typeof(Constants.Ingredient)))
     {
@@ -72,18 +72,6 @@ public class GameManager : MonoBehaviour
     }
   }
 
-  public static bool isInventoryEmpty()
-  {
-    foreach (KeyValuePair<Constants.Ingredient, int> entry in inventory)
-    {
-      if (entry.Value > 0)
-      {
-        return false;
-      }
-    }
-    return true;
-  }
-
   public static bool BrewMixture()
   {
     Debug.Log("What is brewed: " + GetDictionaryString(inventory));
@@ -91,6 +79,8 @@ public class GameManager : MonoBehaviour
     // Mix the ingredients
     potionDiff = Interaction.receive(inventory, answerPotion);
     bool isCorrect = potionDiff.Count == 0;
+
+    ResetInventory();
     return isCorrect;
   }
 
