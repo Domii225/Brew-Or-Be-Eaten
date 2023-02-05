@@ -72,6 +72,18 @@ public class GameManager : MonoBehaviour
     }
   }
 
+  public static bool isInventoryEmpty()
+  {
+    foreach (KeyValuePair<Constants.Ingredient, int> entry in inventory)
+    {
+      if (entry.Value > 0)
+      {
+        return false;
+      }
+    }
+    return true;
+  }
+
   public static bool BrewMixture()
   {
     Debug.Log("What is brewed: " + GetDictionaryString(inventory));

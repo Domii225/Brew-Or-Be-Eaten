@@ -17,9 +17,9 @@ public class FeedMonster : MonoBehaviour
         
     }
 
-    void onTriggerEnter(Collision collision)
+    void onTriggerEnter(Collider other)
     {
-        if (collision.gameObject.name.Contains("Success"))
+        if (other.name.Contains("Success"))
         {
             GameManager.recipesBrewed++;
             if (GameManager.recipesBrewed == 1)
@@ -40,9 +40,9 @@ public class FeedMonster : MonoBehaviour
             GameManager.tries++;
             Shake.shakeAmount = GameManager.tries * shakeStrength;
             Shake.shakeStatic = true;
-            Debug.Log(collision.gameObject.name); // Monster growl
-            GameManager.MonsterMessage(collision.gameObject.name);
+            Debug.Log(other.name); // Monster growl
+            GameManager.MonsterMessage(other.name);
         }
-        Destroy(collision.gameObject);
+        Destroy(other.gameObject);
     }
 }

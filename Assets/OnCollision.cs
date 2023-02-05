@@ -18,13 +18,16 @@ public class OnCollision : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         bool isMixtureSuccessful = GameManager.BrewMixture();
-        if (isMixtureSuccessful)
+        if (!GameManager.isInventoryEmpty())
         {
-            BrewMixture();
-        }
-        else
-        {
-            BrewFailure();
+            if (isMixtureSuccessful)
+            {
+                BrewMixture();
+            }
+            else
+            {
+                BrewFailure();
+            }
         }
     }
     void BrewMixture ()
