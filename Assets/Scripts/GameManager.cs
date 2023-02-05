@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
   public static void AddToInventory(Constants.Ingredient ingredient)
   {
     inventory[ingredient]++;
-    Debug.Log(inventory);
+    Debug.Log(GetInventoryString());
   }
 
   private static void ResetInventory()
