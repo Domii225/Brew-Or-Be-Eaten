@@ -7895,7 +7895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TextObject: {fileID: 1038882853}
-  ResponseTimeout: 0
+  ResponseTimeout: 5
 --- !u!4 &1552626190
 Transform:
   m_ObjectHideFlags: 0
