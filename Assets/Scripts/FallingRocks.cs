@@ -22,6 +22,7 @@ public class FallingRocks : MonoBehaviour
 
     //The time to spawn the object
     private float spawnTime;
+    [SerializeField] int spawnNumeber;
 
     public GameObject rockPrefab;
 
@@ -41,16 +42,31 @@ public class FallingRocks : MonoBehaviour
     // Update is called once per frame
     public void SpawnFallingRocks()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < spawnNumeber; i++)
         {
             spawnNumbers.Add(Random.Range(minTime, maxTime));
         }
-        if(time >= spawnTime)
-        {
-            Vector3 randomSpawnPosition = new Vector3(Random.Range(spawnXmin, spawnXmax), spawnY, Random.Range(spawnZmin, spawnZmax));
-            Instantiate(rockPrefab, randomSpawnPosition, Quaternion.identity);
-        }   
+        spawnNumbers.Sort();
+        Debug.Log(spawnNumbers);
+        Debug.Log((float) spawnNumbers[1] - (float) spawnNumbers[0]);
+        StartCoroutine(Execute());
+    }
 
+    IEnumerator Execute()
+    {
+        for (int i = 1; i < spawnNumeber; i++)
+        {
+            yield return new WaitForSeconds((float) spawnNumbers[i] - (float) spawnNumbers[i - 1]);
+            StartCoroutine(SpawnRock());
+        }
+    }
+
+    IEnumerator SpawnRock()
+    {
+        Vector3 randomSpawnPosition = new Vector3(Random.Range(spawnXmin, spawnXmax), spawnY, Random.Range(spawnZmin, spawnZmax));
+        GameObject rock = Instantiate(rockPrefab, randomSpawnPosition, Quaternion.identity);
+        yield return new WaitForSeconds(3);
+        Destroy(rock);
     }
 
 }
