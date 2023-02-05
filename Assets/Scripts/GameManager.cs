@@ -36,8 +36,8 @@ public class GameManager : MonoBehaviour
     ResetInventory();
     answerPotion = new Dictionary<Constants.Ingredient, int> {
             {Constants.Ingredient.RedRoot, 1},
-            {Constants.Ingredient.BlueRoot, 0},
-            {Constants.Ingredient.GreenRoot, 0},
+            {Constants.Ingredient.BlueRoot, 1},
+            {Constants.Ingredient.GreenRoot, 1},
             {Constants.Ingredient.Item1, 0},
             {Constants.Ingredient.Item2, 0},
             {Constants.Ingredient.Item3, 0},

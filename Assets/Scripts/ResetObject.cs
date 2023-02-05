@@ -25,7 +25,7 @@ public class ResetObject : MonoBehaviour
         {
             GameManager.AddToInventory(Utilities.GetIngredientFromTag(gameObject.tag));
             transform.position = farPosition;
-            if (other.tag.Contains("Root"))
+            if (gameObject.tag.Contains("Root"))
             {
                 rb.isKinematic = true;
                 rb.useGravity = false;
