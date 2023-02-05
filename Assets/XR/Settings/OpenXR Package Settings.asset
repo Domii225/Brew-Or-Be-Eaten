@@ -198,7 +198,7 @@ MonoBehaviour:
   - {fileID: -8402370123810029453}
   - {fileID: -8793529263607962527}
   - {fileID: 6872495564954054575}
-  m_renderMode: 1
+  m_renderMode: 0
   m_depthSubmissionMode: 0
 --- !u!114 &-757923259842167562
 MonoBehaviour:
@@ -496,7 +496,7 @@ MonoBehaviour:
   - {fileID: 9146401280786371236}
   - {fileID: 4887036278783931053}
   - {fileID: -2051549663637505316}
-  m_renderMode: 1
+  m_renderMode: 0
   m_depthSubmissionMode: 0
 --- !u!114 &9146401280786371236
 MonoBehaviour:
