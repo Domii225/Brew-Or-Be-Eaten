@@ -6,37 +6,50 @@ public class OnCollision : MonoBehaviour
 {
     public Transform SpawnPoint;
     public GameObject objToSpawn;
+    private bool isBrewing = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Spoon"))
         {
-            StartCoroutine(Brewing());
+            if (!isBrewing)
+            {
+                isBrewing = true;
+                StartCoroutine(Brewing());
+            }
         }
     }
 
     IEnumerator Brewing()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         bool isMixtureSuccessful = GameManager.BrewMixture();
-        if (isMixtureSuccessful)
+        Debug.Log("is Inventory empty:" + GameManager.isInventoryEmpty());
+        if (!GameManager.isInventoryEmpty())
         {
-            BrewMixture();
+            GameManager.ResetInventory();
+            if (isMixtureSuccessful)
+            {
+                Debug.Log("Success");
+                BrewMixture();
+            }
+            else
+            {
+                Debug.Log("Success");
+                BrewFailure();
+            }
         }
-        else
-        {
-            BrewFailure();
-        }
+        isBrewing = false;
     }
-    void BrewMixture ()
+    void BrewMixture()
     {
         GameObject obj = Instantiate(objToSpawn, SpawnPoint.position, SpawnPoint.rotation);
         obj.name = "Success";
+        Debug.Log(obj.name);
     }
-    void BrewFailure ()
+    void BrewFailure()
     {
         GameObject obj = Instantiate(objToSpawn, SpawnPoint.position, SpawnPoint.rotation);
         obj.name = GameManager.GetFeedback();
+        Debug.Log(obj.name);
     }
-    
-
 }
