@@ -45,11 +45,11 @@ public static class Interaction
                 int index = rnd.Next(potionDiff.Count);
                 if (potionDiff.ElementAt(index).Value > 0)
                 {
-                    output = "THERE IS TOO MUCH " + potionDiff.ElementAt(index).Key;
+                    output = "ARGHH!! THERE IS TOO MUCH " + potionDiff.ElementAt(index).Key;
                 }
                 else
                 {
-                    output = "THERE IS TOO LITTLE " + potionDiff.ElementAt(index).Key;
+                    output = "ARGHH!! THERE IS TOO LITTLE " + potionDiff.ElementAt(index).Key;
                 }
                 break;
             case Constants.FeedbackType.Specific:
@@ -66,10 +66,10 @@ public static class Interaction
                         tooLittle += ingredient.Key + ", ";
                     }
                 }
-                output = "THERE IS TOO MUCH" + tooMuch + " AND TOO LITTLE " + tooLittle;
+                output = "WRONG!!! THERE IS TOO MUCH" + tooMuch + " AND TOO LITTLE " + tooLittle;
                 break;
             case Constants.FeedbackType.FullAnswer:
-                output = "YOU NEED: ";
+                output = "!@#$%! I WANT: ";
                 foreach (KeyValuePair<Constants.Ingredient, int> ingredient in answerPotion)
                 {
                     output += ingredient.Value + " " + ingredient.Key + ", ";

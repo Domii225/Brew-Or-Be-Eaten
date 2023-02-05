@@ -23,10 +23,8 @@ public class OnCollisonBranches : MonoBehaviour
 
         if (other.CompareTag("Mixture"))
         {
-            GameManager.AddToInventory(Constants.Ingredient.Root1);
-            Debug.Log(GameManager.inventory[Constants.Ingredient.Root1]);
+            GameManager.AddToInventory(Constants.Ingredient.RedRoot);
+            Debug.Log(GameManager.inventory[Constants.Ingredient.RedRoot]);
         }
     }
-
-   
 }

@@ -13,9 +13,9 @@ namespace Constants
 
     public enum Ingredient
     {
-        Root1,
-        Root2,
-        Root3,
+        RedRoot,
+        BlueRoot,
+        GreenRoot,
         Item1,
         Item2,
         Item3,

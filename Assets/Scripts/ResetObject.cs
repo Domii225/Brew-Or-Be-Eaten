@@ -23,10 +23,14 @@ public class ResetObject : MonoBehaviour
         }
         if (other.CompareTag("Mixture"))
         {
+            GameManager.AddToInventory(Utilities.GetIngredientFromTag(gameObject.tag));
             transform.position = farPosition;
-            rb.isKinematic = true;
-            rb.useGravity = false;
-            ResetPosition();
+            if (other.tag.Contains("Root"))
+            {
+                rb.isKinematic = true;
+                rb.useGravity = false;
+            }
+            StartCoroutine(ResetPosition());
         }
     }
 
