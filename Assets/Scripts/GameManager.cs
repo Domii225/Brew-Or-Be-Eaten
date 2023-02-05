@@ -56,7 +56,14 @@ public class GameManager : MonoBehaviour
   {
     foreach (Constants.Ingredient ingredient in Enum.GetValues(typeof(Constants.Ingredient)))
     {
-      inventory[ingredient] = 0;
+        if (inventory.ContainsKey(ingredient))
+        {
+            inventory[ingredient] = 0;
+        }
+        else
+        {
+            inventory.Add(ingredient, 0);
+        }
     }
   }
 
