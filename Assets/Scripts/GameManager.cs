@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
   private static bool isTimerRunning = false;
   public static int tries = 0;
   private static int triesMax = 3;
+  [SerializeField] private GameObject TextObject;
+  private static MonsterResponseManager monsterResponseManager;
+  private bool isHurryUp = false;
 
   void Awake()
   {
@@ -43,6 +46,7 @@ public class GameManager : MonoBehaviour
             {Constants.Ingredient.Item2, 0},
             {Constants.Ingredient.Item3, 0},
         };
+    monsterResponseManager = TextObject.GetComponent<MonsterResponseManager>();
     // TODO: uncomment below
     // answerPotion = Interaction.generateAnswer(inventory);
   }
@@ -95,6 +99,11 @@ public class GameManager : MonoBehaviour
     isTimerRunning = true;
   }
 
+  public static void MonsterMessage(string message)
+  {
+    monsterResponseManager.ShowResponse(message);
+  }
+
   public static string GetFeedback()
   {
     // Constants.FeedbackType feedbackType = tries <= 1
@@ -116,6 +125,11 @@ public class GameManager : MonoBehaviour
       {
         Shake.shakeAmount = 0.1f;
         Shake.shakeStatic = true;
+        if (!isHurryUp)
+        {
+          isHurryUp = true;
+          MonsterMessage("HURRY UP!! 30 SECONDS LEFT!!");
+        }
       }
       if (timeNow >= timeToLose)
       {

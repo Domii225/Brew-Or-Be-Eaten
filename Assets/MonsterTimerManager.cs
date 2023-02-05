@@ -37,7 +37,7 @@ public class MonsterTimerManager : MonoBehaviour
             TimeLeft = 0f;
         }
 
-        TextComponent.text = GetFormattedLeftTime(TimeLeft);
+        TextComponent.text = GetFormattedLeftTime(GameManager.timeLeft);
     }
 
     string GetFormattedLeftTime(float time)

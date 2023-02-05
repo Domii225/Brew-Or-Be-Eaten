@@ -10,6 +10,7 @@ public class Book : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UItext = GetComponent<TMPro.TMP_Text>();
         UItext.text = @"Instructions:
         1. Grab ingredients from table or roof.
         2. Put ingredients in cauldron.

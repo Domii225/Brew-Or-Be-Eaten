@@ -28,6 +28,7 @@ public class FeedMonster : MonoBehaviour
                 GameManager.answerPotion = Interaction.generateAnswer(GameManager.inventory);
                 GameManager.gameState = Constants.GameState.InGame;
                 Debug.Log("YOUR TIMER STARTS NOW"); // Monster growl
+                GameManager.MonsterMessage("YOUR TIMER STARTS NOW");
             }
             if (GameManager.recipesBrewed >= GameManager.recipesToWin)
             {
@@ -40,6 +41,7 @@ public class FeedMonster : MonoBehaviour
             Shake.shakeAmount = GameManager.tries * shakeStrength;
             Shake.shakeStatic = true;
             Debug.Log(collision.gameObject.name); // Monster growl
+            GameManager.MonsterMessage(collision.gameObject.name);
         }
         Destroy(collision.gameObject);
     }
