@@ -22,10 +22,12 @@ public class OnCollision : MonoBehaviour
         {
             if (isMixtureSuccessful)
             {
+                Debug.Log("Success");
                 BrewMixture();
             }
             else
             {
+                Debug.Log("Success");
                 BrewFailure();
             }
         }
@@ -34,11 +36,13 @@ public class OnCollision : MonoBehaviour
     {
         GameObject obj = Instantiate(objToSpawn, SpawnPoint.position, SpawnPoint.rotation);
         obj.name = "Success";
+        Debug.Log(obj.name);
     }
     void BrewFailure ()
     {
         GameObject obj = Instantiate(objToSpawn, SpawnPoint.position, SpawnPoint.rotation);
         obj.name = GameManager.GetFeedback();
+        Debug.Log(obj.name);
     }
     
 
