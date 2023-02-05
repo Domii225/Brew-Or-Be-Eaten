@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     Debug.Log(GetDictionaryString(inventory));
   }
 
-  private static void ResetInventory()
+  public static void ResetInventory()
   {
     foreach (Constants.Ingredient ingredient in Enum.GetValues(typeof(Constants.Ingredient)))
     {
@@ -91,8 +91,6 @@ public class GameManager : MonoBehaviour
     // Mix the ingredients
     potionDiff = Interaction.receive(inventory, answerPotion);
     bool isCorrect = potionDiff.Count == 0;
-
-    ResetInventory();
     return isCorrect;
   }
 

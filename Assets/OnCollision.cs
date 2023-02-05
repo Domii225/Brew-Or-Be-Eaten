@@ -20,6 +20,7 @@ public class OnCollision : MonoBehaviour
         bool isMixtureSuccessful = GameManager.BrewMixture();
         if (!GameManager.isInventoryEmpty())
         {
+            GameManager.ResetInventory();
             if (isMixtureSuccessful)
             {
                 Debug.Log("Success");
