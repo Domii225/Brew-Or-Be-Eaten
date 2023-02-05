@@ -9,11 +9,11 @@ public class GameManager : MonoBehaviour
   public static int recipesBrewed = 0;
   private static int recipesToWin = 2;
   private int timeToLose = 60 * 2; // 2 mins
-  public static Dictionary<Constants.Ingredient, int> inventory;
+  public static Dictionary<Constants.Ingredient, int> inventory = new Dictionary<Constants.Ingredient, int>();
 
-  private static Dictionary<Constants.Ingredient, int> answerPotion;
+  private static Dictionary<Constants.Ingredient, int> answerPotion = new Dictionary<Constants.Ingredient, int>();
 
-  private static Dictionary<Constants.Ingredient, int> potionDiff; // dictionary to log difference in ingradients
+  private static Dictionary<Constants.Ingredient, int> potionDiff = new Dictionary<Constants.Ingredient, int>(); // dictionary to log difference in ingradients
 
   public static Constants.GameState gameState = Constants.GameState.PreGame;
   public static float timeNow = 0f;
@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
   {
     foreach (Constants.Ingredient ingredient in Enum.GetValues(typeof(Constants.Ingredient)))
     {
+        Debug.Log(ingredient);
+        Debug.Log(inventory.ContainsKey(ingredient));
         if (inventory.ContainsKey(ingredient))
         {
             inventory[ingredient] = 0;
