@@ -6,9 +6,13 @@ public class Shake : MonoBehaviour
 {
     public bool shake = false;
     public static bool shakeStatic = false;
+
     public AnimationCurve curve;
     public float duration = 1f;
     public static float shakeAmount = 1f;
+
+    public FallingRocks script;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +35,7 @@ public class Shake : MonoBehaviour
     {
         Vector3 startPosition = transform.position;
         float time = 0f;
+        script.SpawnFallingRocks();
 
         while (time < duration)
         {
