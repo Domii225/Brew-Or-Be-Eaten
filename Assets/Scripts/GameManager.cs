@@ -117,10 +117,10 @@ public class GameManager : MonoBehaviour
 
   void Update()
   {
+    timeLeft = timeToLose - timeNow;
     if (isTimerRunning)
     {
       timeNow += Time.deltaTime;
-      timeLeft = timeToLose - timeNow;
       if (timeLeft < 30f)
       {
         Shake.shakeAmount = 0.1f;
