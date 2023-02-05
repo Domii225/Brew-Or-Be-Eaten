@@ -10,10 +10,10 @@ public class MonsterResponseManager : MonoBehaviour
     public GameObject TextObject;
     
     [SerializeField]
-    public TMP_Text TextComponent;
-
-    [SerializeField]
     public float ResponseTimeout;
+
+    private TMP_Text TextComponent;
+
 
     void Start()
     {
